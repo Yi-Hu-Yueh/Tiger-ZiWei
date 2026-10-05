@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tiger-ZiWei 紫微斗數排盤</title>
+  <link rel="stylesheet" href="/static/ziwei.css">
+</head>
+<body>
+  <main class="page-shell">
+    <header class="page-header">
+      <p class="eyebrow">Tiger-ZiWei</p>
+      <h1>紫微斗數排盤</h1>
+      <p>使用專案內既有的確定性曆法與排盤引擎產生命盤。</p>
+    </header>
+
+    <section class="card" aria-labelledby="input-heading">
+      <div class="section-heading">
+        <div>
+          <h2 id="input-heading">出生資料</h2>
+          <p class="muted">可選擇測試預設值，再按「排盤」。</p>
+        </div>
+        <div class="preset-list" aria-label="測試預設值">
+          <button type="button" class="secondary preset" data-preset="A">預設 A</button>
+          <button type="button" class="secondary preset" data-preset="B">預設 B</button>
+          <button type="button" class="secondary preset" data-preset="C">預設 C</button>
+          <button type="button" class="secondary preset" data-preset="L">預設 L</button>
+          <button type="button" class="secondary preset" data-preset="Z">預設 Z</button>
+        </div>
+      </div>
+
+      <form id="chart-form" novalidate>
+        <div class="form-grid">
+          <label>姓名（選填）<input id="name" name="name" autocomplete="name"></label>
+          <label>性別
+            <select id="gender" name="gender" required>
+              <option value="male">男</option>
+              <option value="female">女</option>
+            </select>
+          </label>
+          <label>西元年<input id="birth_year" name="birth_year" type="number" min="1900" max="2100" required></label>
+          <label>月<input id="birth_month" name="birth_month" type="number" min="1" max="12" required></label>
+          <label>日<input id="birth_day" name="birth_day" type="number" min="1" max="31" required></label>
+          <label>時<input id="birth_hour" name="birth_hour" type="number" min="0" max="23" required></label>
+          <label>分<input id="birth_minute" name="birth_minute" type="number" min="0" max="59" required></label>
+          <label class="wide">出生地<input id="birthplace" name="birthplace" required></label>
+        </div>
+        <p class="notice">目前使用輸入的民用／標準時間。真太陽時尚未實作。</p>
+        <div id="error-message" class="error" role="alert" hidden></div>
+        <button id="submit-button" type="submit" class="primary">排盤</button>
+      </form>
+    </section>
+
+    <section id="result" hidden>
+      <section class="card chart-preview-card" aria-labelledby="chart-preview-heading">
+        <div class="section-heading">
+          <div>
+            <h2 id="chart-preview-heading">正式命盤圖</h2>
+            <p class="muted">由 Python 使用既有排盤結果產生，不含命理解讀。</p>
+          </div>
+          <div class="preview-actions">
+            <a id="chart-fullsize" class="secondary-action" href="#" target="_blank" rel="noopener" hidden>放大查看</a>
+            <a id="chart-download" class="download-button" href="#" download hidden>下載 PNG</a>
+          </div>
+        </div>
+        <p id="image-status" class="muted" role="status">正在產生命盤圖…</p>
+        <div id="chart-image-wrap" class="chart-image-wrap" hidden>
+          <a id="chart-image-link" href="#" target="_blank" rel="noopener" aria-label="放大查看命盤圖">
+            <img id="chart-image" alt="Tiger-ZiWei 十二宮紫微命盤預覽">
+          </a>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="summary-heading">
+        <h2 id="summary-heading">命盤摘要</h2>
+        <dl id="summary" class="summary-grid"></dl>
+      </section>
+
+      <section class="card table-card" aria-labelledby="palace-heading">
+        <h2 id="palace-heading">十二宮</h2>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>地支</th><th>宮名</th><th>宮干支</th><th>命宮標記</th><th>身宮標記</th><th>主星</th><th>輔星</th><th>生年四化</th></tr></thead>
+            <tbody id="palace-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card table-card" aria-labelledby="transformation-heading">
+        <h2 id="transformation-heading">生年四化明細</h2>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>四化</th><th>星曜</th><th>類型</th><th>地支</th><th>宮位</th></tr></thead>
+            <tbody id="transformation-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <section class="card rules" aria-labelledby="rules-heading">
+      <h2 id="rules-heading">目前規則</h2>
+      <ul>
+        <li>年界：農曆正月初一，不以立春為界。</li>
+        <li>時間：民用／標準時間；真太陽時尚未實作。</li>
+        <li>晚子時：23:xx 不換日。</li>
+        <li>閏月：Tiger-ZiWei 採整個閏月按次月處理本命月規則。</li>
+        <li>壬年四化採：天梁化祿、紫微化權、天府化科、武曲化忌。</li>
+        <li>LLM 不參與排盤；所有結果均由本地確定性程式計算。</li>
+      </ul>
+    </section>
+  </main>
+  <script src="/static/ziwei.js" defer></script>
+</body>
+</html>
