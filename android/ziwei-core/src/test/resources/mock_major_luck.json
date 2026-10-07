@@ -1,0 +1,46 @@
+{
+  "major_luck_index": 5,
+  "start_nominal_age": 45,
+  "end_nominal_age": 54,
+  "palace_name": "官祿宮",
+  "earthly_branch": "午",
+  "palace_ganzhi": {
+    "heavenly_stem": "壬",
+    "earthly_branch": "午"
+  },
+  "overview": "此大限可能較重視職涯定位與資源整合，可用務實方式觀察十年方向。",
+  "host_palace_analysis": "大限落在本命官祿宮，可能強化對工作角色與責任的關注。",
+  "transformation_analysis": [
+    {
+      "transformation_type": "化祿",
+      "star_name": "天梁",
+      "natal_palace_name": "父母宮",
+      "analysis": "天梁化祿可留意支持系統與經驗累積。"
+    },
+    {
+      "transformation_type": "化權",
+      "star_name": "紫微",
+      "natal_palace_name": "官祿宮",
+      "analysis": "紫微化權可能提高承擔與統整要求。"
+    },
+    {
+      "transformation_type": "化科",
+      "star_name": "天府",
+      "natal_palace_name": "財帛宮",
+      "analysis": "天府化科適合重視穩健規劃與可信度。"
+    },
+    {
+      "transformation_type": "化忌",
+      "star_name": "武曲",
+      "natal_palace_name": "命宮",
+      "analysis": "武曲化忌提醒避免對成果與效率過度緊繃。"
+    }
+  ],
+  "career": "職涯上可能更需要建立清楚權責與長期節奏。",
+  "finance": "財務宜以穩健配置與可持續性為重點。",
+  "relationships": "感情互動可留意工作壓力對溝通品質的影響。",
+  "family_and_interpersonal": "家庭與人際適合重視界線、承諾及合作方式。",
+  "strengths": "較能整合資源並承擔複雜任務。",
+  "potential_challenges": "可留意責任集中與自我要求過高。",
+  "practical_focus": "適合把重點放在可持續的責任分配與資源管理。"
+}

@@ -7,6 +7,7 @@ from pydantic import BaseModel, ConfigDict, Field, computed_field, model_validat
 
 from app.models.birth import BirthData
 from app.models.calendar import EARTHLY_BRANCHES, CalendarResult, EarthlyBranch, Ganzhi, HeavenlyStem, LunarDate
+from app.models.major_luck import MajorLuckResult
 from app.models.ziwei import (
     FiveElementsBureauResult, MajorStarChart, MajorStarName, MajorStarPlacement,
     PalaceLayout, PalaceName,
@@ -69,6 +70,7 @@ class BasicChartResult(BaseModel):
     auxiliary_star_chart: AuxiliaryStarChart
     birth_year_transformations: BirthYearTransformations
     palaces: tuple[BasicChartPalace, ...] = Field(min_length=12, max_length=12)
+    major_luck: MajorLuckResult
 
     @model_validator(mode="after")
     def validate_composition(self) -> Self:
@@ -79,6 +81,7 @@ class BasicChartResult(BaseModel):
         from app.ziwei.main_stars import calculate_major_stars
         from app.ziwei.auxiliary_stars import calculate_auxiliary_stars
         from app.ziwei.transformations import calculate_birth_year_transformations
+        from app.ziwei.major_luck import calculate_major_luck
 
         if self.calendar != calculate_calendar(self.birth_data):
             raise ValueError("Phase 1B calendar identity mismatch")
@@ -122,6 +125,14 @@ class BasicChartResult(BaseModel):
         expected = self.auxiliary_star_chart.star_to_branch
         if len(auxiliary) != len(expected) or {s.name: s.earthly_branch for s in auxiliary} != expected:
             raise ValueError("grouped auxiliary placements differ from Phase 2A")
+        expected_major_luck = calculate_major_luck(
+            year_heavenly_stem=self.calendar.year_ganzhi.heavenly_stem,
+            gender=self.birth_data.gender,
+            bureau=self.five_elements_bureau,
+            palaces=self.palaces,
+        )
+        if self.major_luck != expected_major_luck:
+            raise ValueError("Phase 6A Major-Luck identity mismatch")
         return self
 
     # Convenience accessors keep the upstream objects authoritative instead of

@@ -9,6 +9,7 @@ from app.ziwei.main_stars import calculate_major_stars
 from app.ziwei.palace import calculate_palaces
 from app.ziwei.auxiliary_stars import calculate_auxiliary_stars
 from app.ziwei.transformations import calculate_birth_year_transformations
+from app.ziwei.major_luck import calculate_major_luck
 
 
 def calculate_basic_chart(birth_data: BirthData) -> BasicChartResult:
@@ -35,7 +36,14 @@ def calculate_basic_chart(birth_data: BirthData) -> BasicChartResult:
             auxiliary_stars=tuple(s for s in auxiliary.stars if s.earthly_branch == branch),
         ) for branch in EARTHLY_BRANCHES
     )
+    major_luck = calculate_major_luck(
+        year_heavenly_stem=calendar.year_ganzhi.heavenly_stem,
+        gender=snapshot.gender,
+        bureau=bureau,
+        palaces=palaces,
+    )
     return BasicChartResult(birth_data=snapshot, calendar=calendar, palace_layout=layout,
                             five_elements_bureau=bureau, major_star_chart=stars,
                             auxiliary_star_chart=auxiliary,
-                            birth_year_transformations=transformations, palaces=palaces)
+                            birth_year_transformations=transformations, palaces=palaces,
+                            major_luck=major_luck)

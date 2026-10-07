@@ -1,1 +1,81 @@
-"""LLM interpretation package; integration is not implemented yet."""
+"""Shared NVIDIA transport and structured Zi Wei interpretation services."""
+
+from app.llm.nvidia_client import (
+    NvidiaChatResult,
+    NvidiaClient,
+    NvidiaClientError,
+    NvidiaErrorCode,
+)
+from app.llm.interpreter import (
+    InterpretationParseError,
+    ZiweiInterpreter,
+    build_interpretation_messages,
+    parse_interpretation_json,
+    serialize_chart_facts,
+)
+from app.llm.major_luck_interpreter import (
+    MajorLuckInterpretationParseError,
+    MajorLuckInterpreter,
+    build_major_luck_interpretation_facts,
+    build_major_luck_interpretation_messages,
+    parse_major_luck_interpretation_json,
+    validate_major_luck_fact_lock,
+)
+from app.llm.flow_year_interpreter import (
+    FlowYearInterpretationParseError,
+    FlowYearInterpreter,
+    active_major_luck_anchor,
+    build_flow_year_interpretation_facts,
+    build_flow_year_interpretation_messages,
+    parse_flow_year_interpretation_json,
+    validate_flow_year_fact_lock,
+)
+from app.llm.flow_period_interpreter import (
+    FlowDayInterpreter,
+    FlowMonthInterpreter,
+    FlowPeriodInterpretationParseError,
+    build_flow_day_interpretation_facts,
+    build_flow_day_interpretation_messages,
+    build_flow_month_interpretation_facts,
+    build_flow_month_interpretation_messages,
+    parse_flow_day_interpretation_json,
+    parse_flow_month_interpretation_json,
+    validate_flow_day_fact_lock,
+    validate_flow_month_fact_lock,
+)
+
+__all__ = [
+    "NvidiaChatResult",
+    "NvidiaClient",
+    "NvidiaClientError",
+    "NvidiaErrorCode",
+    "InterpretationParseError",
+    "ZiweiInterpreter",
+    "build_interpretation_messages",
+    "parse_interpretation_json",
+    "serialize_chart_facts",
+    "MajorLuckInterpretationParseError",
+    "MajorLuckInterpreter",
+    "build_major_luck_interpretation_facts",
+    "build_major_luck_interpretation_messages",
+    "parse_major_luck_interpretation_json",
+    "validate_major_luck_fact_lock",
+    "FlowYearInterpretationParseError",
+    "FlowYearInterpreter",
+    "active_major_luck_anchor",
+    "build_flow_year_interpretation_facts",
+    "build_flow_year_interpretation_messages",
+    "parse_flow_year_interpretation_json",
+    "validate_flow_year_fact_lock",
+    "FlowMonthInterpreter",
+    "FlowDayInterpreter",
+    "FlowPeriodInterpretationParseError",
+    "build_flow_month_interpretation_facts",
+    "build_flow_day_interpretation_facts",
+    "build_flow_month_interpretation_messages",
+    "build_flow_day_interpretation_messages",
+    "parse_flow_month_interpretation_json",
+    "parse_flow_day_interpretation_json",
+    "validate_flow_month_fact_lock",
+    "validate_flow_day_fact_lock",
+]

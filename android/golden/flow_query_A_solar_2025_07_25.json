@@ -1,0 +1,501 @@
+{
+  "flow_day": {
+    "day_ganzhi": {
+      "earthly_branch": "未",
+      "heavenly_stem": "乙"
+    },
+    "flow_day_life_palace_branch": "亥",
+    "natal_host_palace_ganzhi": {
+      "earthly_branch": "亥",
+      "heavenly_stem": "丁"
+    },
+    "natal_host_palace_name": "子女宮",
+    "palaces": [
+      {
+        "earthly_branch": "亥",
+        "flow_palace_name": "命宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "亥",
+          "heavenly_stem": "丁"
+        },
+        "natal_palace_name": "子女宮"
+      },
+      {
+        "earthly_branch": "子",
+        "flow_palace_name": "父母宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "子",
+          "heavenly_stem": "戊"
+        },
+        "natal_palace_name": "夫妻宮"
+      },
+      {
+        "earthly_branch": "丑",
+        "flow_palace_name": "福德宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "丑",
+          "heavenly_stem": "己"
+        },
+        "natal_palace_name": "兄弟宮"
+      },
+      {
+        "earthly_branch": "寅",
+        "flow_palace_name": "田宅宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "寅",
+          "heavenly_stem": "戊"
+        },
+        "natal_palace_name": "命宮"
+      },
+      {
+        "earthly_branch": "卯",
+        "flow_palace_name": "官祿宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "卯",
+          "heavenly_stem": "己"
+        },
+        "natal_palace_name": "父母宮"
+      },
+      {
+        "earthly_branch": "辰",
+        "flow_palace_name": "交友宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "辰",
+          "heavenly_stem": "庚"
+        },
+        "natal_palace_name": "福德宮"
+      },
+      {
+        "earthly_branch": "巳",
+        "flow_palace_name": "遷移宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "巳",
+          "heavenly_stem": "辛"
+        },
+        "natal_palace_name": "田宅宮"
+      },
+      {
+        "earthly_branch": "午",
+        "flow_palace_name": "疾厄宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "午",
+          "heavenly_stem": "壬"
+        },
+        "natal_palace_name": "官祿宮"
+      },
+      {
+        "earthly_branch": "未",
+        "flow_palace_name": "財帛宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "未",
+          "heavenly_stem": "癸"
+        },
+        "natal_palace_name": "交友宮"
+      },
+      {
+        "earthly_branch": "申",
+        "flow_palace_name": "子女宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "申",
+          "heavenly_stem": "甲"
+        },
+        "natal_palace_name": "遷移宮"
+      },
+      {
+        "earthly_branch": "酉",
+        "flow_palace_name": "夫妻宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "酉",
+          "heavenly_stem": "乙"
+        },
+        "natal_palace_name": "疾厄宮"
+      },
+      {
+        "earthly_branch": "戌",
+        "flow_palace_name": "兄弟宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "戌",
+          "heavenly_stem": "丙"
+        },
+        "natal_palace_name": "財帛宮"
+      }
+    ],
+    "target_is_leap_month": true,
+    "target_lunar_day": 1,
+    "target_lunar_month": 6,
+    "target_lunar_year": 2025,
+    "transformations": [
+      {
+        "natal_branch": "巳",
+        "natal_palace_name": "田宅宮",
+        "star_category": "major",
+        "star_name": "天機",
+        "transformation_type": "化祿"
+      },
+      {
+        "natal_branch": "卯",
+        "natal_palace_name": "父母宮",
+        "star_category": "major",
+        "star_name": "天梁",
+        "transformation_type": "化權"
+      },
+      {
+        "natal_branch": "午",
+        "natal_palace_name": "官祿宮",
+        "star_category": "major",
+        "star_name": "紫微",
+        "transformation_type": "化科"
+      },
+      {
+        "natal_branch": "亥",
+        "natal_palace_name": "子女宮",
+        "star_category": "major",
+        "star_name": "太陰",
+        "transformation_type": "化忌"
+      }
+    ]
+  },
+  "flow_month": {
+    "effective_month": 7,
+    "flow_month_life_palace_branch": "亥",
+    "is_leap_month": true,
+    "lunar_month": 6,
+    "lunar_year": 2025,
+    "month_ganzhi": {
+      "earthly_branch": "未",
+      "heavenly_stem": "癸"
+    },
+    "natal_host_palace_ganzhi": {
+      "earthly_branch": "亥",
+      "heavenly_stem": "丁"
+    },
+    "natal_host_palace_name": "子女宮",
+    "palaces": [
+      {
+        "earthly_branch": "亥",
+        "flow_palace_name": "命宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "亥",
+          "heavenly_stem": "丁"
+        },
+        "natal_palace_name": "子女宮"
+      },
+      {
+        "earthly_branch": "子",
+        "flow_palace_name": "父母宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "子",
+          "heavenly_stem": "戊"
+        },
+        "natal_palace_name": "夫妻宮"
+      },
+      {
+        "earthly_branch": "丑",
+        "flow_palace_name": "福德宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "丑",
+          "heavenly_stem": "己"
+        },
+        "natal_palace_name": "兄弟宮"
+      },
+      {
+        "earthly_branch": "寅",
+        "flow_palace_name": "田宅宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "寅",
+          "heavenly_stem": "戊"
+        },
+        "natal_palace_name": "命宮"
+      },
+      {
+        "earthly_branch": "卯",
+        "flow_palace_name": "官祿宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "卯",
+          "heavenly_stem": "己"
+        },
+        "natal_palace_name": "父母宮"
+      },
+      {
+        "earthly_branch": "辰",
+        "flow_palace_name": "交友宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "辰",
+          "heavenly_stem": "庚"
+        },
+        "natal_palace_name": "福德宮"
+      },
+      {
+        "earthly_branch": "巳",
+        "flow_palace_name": "遷移宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "巳",
+          "heavenly_stem": "辛"
+        },
+        "natal_palace_name": "田宅宮"
+      },
+      {
+        "earthly_branch": "午",
+        "flow_palace_name": "疾厄宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "午",
+          "heavenly_stem": "壬"
+        },
+        "natal_palace_name": "官祿宮"
+      },
+      {
+        "earthly_branch": "未",
+        "flow_palace_name": "財帛宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "未",
+          "heavenly_stem": "癸"
+        },
+        "natal_palace_name": "交友宮"
+      },
+      {
+        "earthly_branch": "申",
+        "flow_palace_name": "子女宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "申",
+          "heavenly_stem": "甲"
+        },
+        "natal_palace_name": "遷移宮"
+      },
+      {
+        "earthly_branch": "酉",
+        "flow_palace_name": "夫妻宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "酉",
+          "heavenly_stem": "乙"
+        },
+        "natal_palace_name": "疾厄宮"
+      },
+      {
+        "earthly_branch": "戌",
+        "flow_palace_name": "兄弟宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "戌",
+          "heavenly_stem": "丙"
+        },
+        "natal_palace_name": "財帛宮"
+      }
+    ],
+    "transformations": [
+      {
+        "natal_branch": "申",
+        "natal_palace_name": "遷移宮",
+        "star_category": "major",
+        "star_name": "破軍",
+        "transformation_type": "化祿"
+      },
+      {
+        "natal_branch": "丑",
+        "natal_palace_name": "兄弟宮",
+        "star_category": "major",
+        "star_name": "巨門",
+        "transformation_type": "化權"
+      },
+      {
+        "natal_branch": "亥",
+        "natal_palace_name": "子女宮",
+        "star_category": "major",
+        "star_name": "太陰",
+        "transformation_type": "化科"
+      },
+      {
+        "natal_branch": "子",
+        "natal_palace_name": "夫妻宮",
+        "star_category": "major",
+        "star_name": "貪狼",
+        "transformation_type": "化忌"
+      }
+    ]
+  },
+  "flow_year": {
+    "active_major_luck": null,
+    "after_supported_major_luck": false,
+    "before_first_major_luck": true,
+    "earthly_branch": "巳",
+    "flow_life_palace_branch": "巳",
+    "ganzhi": {
+      "earthly_branch": "巳",
+      "heavenly_stem": "乙"
+    },
+    "heavenly_stem": "乙",
+    "nominal_age": 1,
+    "palaces": [
+      {
+        "earthly_branch": "巳",
+        "flow_palace_name": "命宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "巳",
+          "heavenly_stem": "辛"
+        },
+        "natal_palace_heavenly_stem": "辛",
+        "natal_palace_name": "田宅宮"
+      },
+      {
+        "earthly_branch": "午",
+        "flow_palace_name": "父母宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "午",
+          "heavenly_stem": "壬"
+        },
+        "natal_palace_heavenly_stem": "壬",
+        "natal_palace_name": "官祿宮"
+      },
+      {
+        "earthly_branch": "未",
+        "flow_palace_name": "福德宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "未",
+          "heavenly_stem": "癸"
+        },
+        "natal_palace_heavenly_stem": "癸",
+        "natal_palace_name": "交友宮"
+      },
+      {
+        "earthly_branch": "申",
+        "flow_palace_name": "田宅宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "申",
+          "heavenly_stem": "甲"
+        },
+        "natal_palace_heavenly_stem": "甲",
+        "natal_palace_name": "遷移宮"
+      },
+      {
+        "earthly_branch": "酉",
+        "flow_palace_name": "官祿宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "酉",
+          "heavenly_stem": "乙"
+        },
+        "natal_palace_heavenly_stem": "乙",
+        "natal_palace_name": "疾厄宮"
+      },
+      {
+        "earthly_branch": "戌",
+        "flow_palace_name": "交友宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "戌",
+          "heavenly_stem": "丙"
+        },
+        "natal_palace_heavenly_stem": "丙",
+        "natal_palace_name": "財帛宮"
+      },
+      {
+        "earthly_branch": "亥",
+        "flow_palace_name": "遷移宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "亥",
+          "heavenly_stem": "丁"
+        },
+        "natal_palace_heavenly_stem": "丁",
+        "natal_palace_name": "子女宮"
+      },
+      {
+        "earthly_branch": "子",
+        "flow_palace_name": "疾厄宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "子",
+          "heavenly_stem": "戊"
+        },
+        "natal_palace_heavenly_stem": "戊",
+        "natal_palace_name": "夫妻宮"
+      },
+      {
+        "earthly_branch": "丑",
+        "flow_palace_name": "財帛宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "丑",
+          "heavenly_stem": "己"
+        },
+        "natal_palace_heavenly_stem": "己",
+        "natal_palace_name": "兄弟宮"
+      },
+      {
+        "earthly_branch": "寅",
+        "flow_palace_name": "子女宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "寅",
+          "heavenly_stem": "戊"
+        },
+        "natal_palace_heavenly_stem": "戊",
+        "natal_palace_name": "命宮"
+      },
+      {
+        "earthly_branch": "卯",
+        "flow_palace_name": "夫妻宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "卯",
+          "heavenly_stem": "己"
+        },
+        "natal_palace_heavenly_stem": "己",
+        "natal_palace_name": "父母宮"
+      },
+      {
+        "earthly_branch": "辰",
+        "flow_palace_name": "兄弟宮",
+        "natal_palace_ganzhi": {
+          "earthly_branch": "辰",
+          "heavenly_stem": "庚"
+        },
+        "natal_palace_heavenly_stem": "庚",
+        "natal_palace_name": "福德宮"
+      }
+    ],
+    "target_lunar_year": 2025,
+    "transformations": [
+      {
+        "earthly_branch": "巳",
+        "natal_palace_name": "田宅宮",
+        "star_category": "major",
+        "star_name": "天機",
+        "transformation_type": "化祿"
+      },
+      {
+        "earthly_branch": "卯",
+        "natal_palace_name": "父母宮",
+        "star_category": "major",
+        "star_name": "天梁",
+        "transformation_type": "化權"
+      },
+      {
+        "earthly_branch": "午",
+        "natal_palace_name": "官祿宮",
+        "star_category": "major",
+        "star_name": "紫微",
+        "transformation_type": "化科"
+      },
+      {
+        "earthly_branch": "亥",
+        "natal_palace_name": "子女宮",
+        "star_category": "major",
+        "star_name": "太陰",
+        "transformation_type": "化忌"
+      }
+    ]
+  },
+  "normalized_target": {
+    "converted_solar_date": null,
+    "effective_month": 7,
+    "input_mode": "solar",
+    "is_leap_month": true,
+    "lunar_day": 1,
+    "lunar_month": 6,
+    "lunar_year": 2025,
+    "original_is_leap_month": null,
+    "original_lunar_day": null,
+    "original_lunar_month": null,
+    "original_lunar_year": null,
+    "original_solar_date": "2025-07-25"
+  },
+  "original_query": {
+    "day": 25,
+    "mode": "solar",
+    "month": 7,
+    "year": 2025
+  },
+  "query_mode": "solar"
+}

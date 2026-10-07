@@ -7,11 +7,27 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from app.api.chart import router as chart_router
+from app.api.flow_year import router as flow_year_router
+from app.api.flow_date import router as flow_date_router
+from app.api.flow_query import router as flow_query_router
+from app.api.flow_year_interpretation import router as flow_year_interpretation_router
+from app.api.flow_period_interpretation import router as flow_period_interpretation_router
+from app.api.major_luck_interpretation import router as major_luck_interpretation_router
+from app.api.llm_models import router as llm_models_router
+from app.api.report import router as report_router
 
 app = FastAPI(title="Tiger-ZiWei")
 STATIC_DIR = Path(__file__).resolve().parent / "static"
 
 app.include_router(chart_router)
+app.include_router(flow_year_router)
+app.include_router(flow_date_router)
+app.include_router(flow_query_router)
+app.include_router(flow_year_interpretation_router)
+app.include_router(flow_period_interpretation_router)
+app.include_router(major_luck_interpretation_router)
+app.include_router(llm_models_router)
+app.include_router(report_router)
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 

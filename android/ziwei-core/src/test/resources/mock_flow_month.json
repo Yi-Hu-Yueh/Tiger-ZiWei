@@ -1,0 +1,48 @@
+{
+  "lunar_year": 2029,
+  "lunar_month": 1,
+  "is_leap_month": false,
+  "month_ganzhi": {
+    "heavenly_stem": "丙",
+    "earthly_branch": "寅"
+  },
+  "flow_month_life_palace_branch": "酉",
+  "natal_host_palace": "疾厄宮",
+  "overview": "此流月可留意節奏與資源配置。",
+  "life_palace_analysis": "流月命宮較容易凸顯本命宿宮課題。",
+  "major_luck_context": "大限提供十年背景。",
+  "flow_year_context": "流年提供年度背景。",
+  "transformation_analysis": [
+    {
+      "transformation_type": "化祿",
+      "star_name": "天同",
+      "natal_palace_name": "兄弟宮",
+      "analysis": "此流月四化可作為當月觀察重點。"
+    },
+    {
+      "transformation_type": "化權",
+      "star_name": "天機",
+      "natal_palace_name": "田宅宮",
+      "analysis": "此流月四化可作為當月觀察重點。"
+    },
+    {
+      "transformation_type": "化科",
+      "star_name": "文昌",
+      "natal_palace_name": "財帛宮",
+      "analysis": "此流月四化可作為當月觀察重點。"
+    },
+    {
+      "transformation_type": "化忌",
+      "star_name": "廉貞",
+      "natal_palace_name": "財帛宮",
+      "analysis": "此流月四化可作為當月觀察重點。"
+    }
+  ],
+  "career": "職涯可把重點放在可執行事項。",
+  "finance": "財務可留意彈性。",
+  "relationships": "感情可重視溝通。",
+  "family_and_interpersonal": "家庭人際宜釐清界線。",
+  "strengths": "優勢在於整合資源。",
+  "potential_challenges": "可留意壓力集中。",
+  "practical_focus": "適合安排清楚優先順序。"
+}

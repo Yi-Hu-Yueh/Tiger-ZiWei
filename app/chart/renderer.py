@@ -145,6 +145,13 @@ def _star_display_items(
     )
 
 
+def _major_luck_age_text(chart: BasicChartResult, branch: str) -> str:
+    """Return the one Major-Luck nominal-age range hosted by this branch."""
+
+    period = next(item for item in chart.major_luck.periods if item.earthly_branch == branch)
+    return f"{period.start_nominal_age}–{period.end_nominal_age}歲"
+
+
 def _draw_palace(
     draw: ImageDraw.ImageDraw,
     palace: BasicChartPalace,
@@ -172,6 +179,9 @@ def _draw_palace(
         markers.append("【身】")
     if markers:
         draw.text((x, y), " ".join(markers), font=fonts["marker"], fill="#a33b2f")
+    luck_text = _major_luck_age_text(chart, palace.earthly_branch)
+    luck_width = draw.textlength(luck_text, font=fonts["luck"])
+    draw.text((x1 - pad - luck_width, y), luck_text, font=fonts["luck"], fill="#7d342d")
     y = y0 + 107
 
     sections: tuple[tuple[str, tuple[str, ...], str, str, int], ...] = (
@@ -272,6 +282,7 @@ def render_chart_png(
         "title": _font(42, bold=True),
         "palace": _font(34, bold=True),
         "marker": _font(24, bold=True),
+        "luck": _font(22, bold=True),
         "label": _font(19),
         "major": _font(30, bold=True),
         "auxiliary": _font(24),

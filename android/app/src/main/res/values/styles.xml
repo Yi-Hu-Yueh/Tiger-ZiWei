@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="android:style/Theme.Material.Light">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:colorAccent">#8A342D</item>
+        <item name="android:navigationBarColor">#F4EFE6</item>
+        <item name="android:statusBarColor">#67231E</item>
+    </style>
+</resources>

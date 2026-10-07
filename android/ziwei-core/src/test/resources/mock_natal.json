@@ -1,0 +1,64 @@
+{
+  "overview": "從傳統紫微斗數的角度，此命盤可作為自我觀察的參考。",
+  "palace_interpretations": [
+    {
+      "palace_name": "命宮",
+      "summary": "命宮配置可用克制方式觀察。"
+    },
+    {
+      "palace_name": "兄弟宮",
+      "summary": "兄弟宮配置可用克制方式觀察。"
+    },
+    {
+      "palace_name": "夫妻宮",
+      "summary": "夫妻宮配置可用克制方式觀察。"
+    },
+    {
+      "palace_name": "子女宮",
+      "summary": "子女宮配置可用克制方式觀察。"
+    },
+    {
+      "palace_name": "財帛宮",
+      "summary": "財帛宮配置可用克制方式觀察。"
+    },
+    {
+      "palace_name": "疾厄宮",
+      "summary": "疾厄宮配置可用克制方式觀察。"
+    },
+    {
+      "palace_name": "遷移宮",
+      "summary": "遷移宮配置可用克制方式觀察。"
+    },
+    {
+      "palace_name": "交友宮",
+      "summary": "交友宮配置可用克制方式觀察。"
+    },
+    {
+      "palace_name": "官祿宮",
+      "summary": "官祿宮配置可用克制方式觀察。"
+    },
+    {
+      "palace_name": "田宅宮",
+      "summary": "田宅宮配置可用克制方式觀察。"
+    },
+    {
+      "palace_name": "福德宮",
+      "summary": "福德宮配置可用克制方式觀察。"
+    },
+    {
+      "palace_name": "父母宮",
+      "summary": "父母宮配置可用克制方式觀察。"
+    }
+  ],
+  "transformation_analysis": "生年四化依已提供的四個目標解讀，不重新選擇星曜。",
+  "overall": {
+    "personality": "性格傾向可從既有配置綜合觀察。",
+    "career": "職涯方向宜結合現實能力與選擇評估。",
+    "finance": "財務傾向只供傳統命理角度參考。",
+    "relationships": "感情互動可留意溝通與界線。",
+    "interpersonal": "人際模式可能重視互信與分工。",
+    "family": "家庭議題宜配合實際生活脈絡理解。",
+    "strengths": "優勢在於能整合不同面向。",
+    "potential_challenges": "可能的挑戰仍需依個人情境觀察。"
+  }
+}

@@ -1,0 +1,11 @@
+Tiger-ZiWei standalone Android dependencies
+
+lunar-java 1.7.7 — https://github.com/6tail/lunar-java — MIT License
+Copyright (c) 2020 6tail
+Full license: LUNAR-JAVA-LICENSE.txt
+
+Gson 2.11.0 — https://github.com/google/gson — Apache License 2.0
+Copyright 2008 Google Inc.
+Full license: GSON-LICENSE.txt
+
+No proprietary PC fonts are bundled. PNG uses Android system font fallback.

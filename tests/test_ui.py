@@ -1,8 +1,14 @@
 """HTTP contract tests for the minimal Phase 2B browser UI."""
 
+import app.api.chart as chart_api
 from fastapi.testclient import TestClient
+import pytest
 
+from app.llm.interpreter import InterpretationParseError
+from app.llm.nvidia_client import NvidiaClientError, NvidiaErrorCode
 from app.main import app
+from app.models.interpretation import InterpretationResult
+from app.models.ziwei import PalaceName
 
 
 client = TestClient(app)
@@ -15,6 +21,27 @@ PRESET_A = {
 
 def post_chart(**overrides: object):
     return client.post("/api/chart", json=PRESET_A | overrides)
+
+
+def interpretation_payload() -> dict[str, object]:
+    return {
+        "overview": "從傳統紫微斗數的角度，此命盤可作為自我觀察參考。",
+        "palace_interpretations": [
+            {"palace_name": palace.value, "summary": f"{palace.value}解讀。"}
+            for palace in PalaceName
+        ],
+        "transformation_analysis": "依既定生年四化解讀。",
+        "overall": {
+            "personality": "性格解讀。",
+            "career": "職涯解讀。",
+            "finance": "財務傾向解讀。",
+            "relationships": "感情解讀。",
+            "interpersonal": "人際解讀。",
+            "family": "家庭解讀。",
+            "strengths": "優勢解讀。",
+            "potential_challenges": "可留意的挑戰。",
+        },
+    }
 
 
 def test_ziwei_page_is_available() -> None:
@@ -46,6 +73,80 @@ def test_page_documents_deterministic_rules() -> None:
         assert expected in html
 
 
+def test_birth_datetime_toggle_defaults_to_masked_visible_solar_fields() -> None:
+    html = client.get("/ziwei").text
+    assert 'id="birth-date-time-toggle" type="button" class="secondary" aria-pressed="false"' in html
+    assert "顯示出生年月日時分" in html
+    assert '<label class="solar-date-field">西元年' in html
+    assert '<label class="solar-date-field">國曆月' in html
+    assert '<label class="solar-date-field">國曆日' in html
+    assert '<label class="birth-time-field">時' in html
+    assert '<label class="birth-time-field">分' in html
+    assert '<label class="lunar-date-field" hidden>農曆年' in html
+    assert '<label class="lunar-date-field" hidden>是否閏月' in html
+    for field in (
+        "birth_year", "birth_month", "birth_day", "lunar_year", "lunar_month",
+        "lunar_day", "birth_hour", "birth_minute",
+    ):
+        assert f'id="{field}"' in html
+        input_markup = html[html.index(f'id="{field}"'):]
+        assert 'type="password"' in input_markup[:250]
+        assert 'inputmode="numeric"' in input_markup[:250]
+    assert 'id="is_leap_month" name="is_leap_month"' in html
+
+
+def test_birth_datetime_toggle_masks_only_numeric_values_and_preserves_values() -> None:
+    javascript = client.get("/static/ziwei.js").text
+    masker = javascript[javascript.index("function setNumericValuesShown"):javascript.index("function setBirthDateTimeShown")]
+    setter = javascript[javascript.index("function setBirthDateTimeShown"):javascript.index("function collectInput")]
+    assert 'input.type = shown ? "number" : "password"' in masker
+    assert "birthDateTimeShown = shown" in setter
+    assert 'setAttribute("aria-pressed", String(shown))' in setter
+    assert 'shown ? "隱藏出生年月日時分" : "顯示出生年月日時分"' in setter
+    assert "setNumericValuesShown(birthDateTimeInputs, shown)" in setter
+    for forbidden in (".value =", "fetch(", "invalidate", "clearInterpretation", "clearFlowYear"):
+        assert forbidden not in masker + setter
+
+    html = client.get("/ziwei").text
+    for still_visible in (
+        'id="calendar-solar"', 'id="calendar-lunar"', 'id="name"', 'id="gender"',
+        'id="birthplace"', 'id="submit-button"', 'data-preset="A"', 'data-preset="Z"',
+    ):
+        assert still_visible in html
+
+
+def test_birth_toggle_preserves_mode_and_preset_without_target_masking() -> None:
+    javascript = client.get("/static/ziwei.js").text
+    birth_handler = javascript[
+        javascript.index('birthDateTimeToggle.addEventListener("click"'):
+        javascript.index('form.addEventListener("input"')
+    ]
+    assert "setBirthDateTimeShown(!birthDateTimeShown)" in birth_handler
+    assert "fetch(" not in birth_handler
+    assert "invalidate" not in birth_handler
+    preset = javascript[javascript.index("function setPreset"):javascript.index("function selectedCalendarType")]
+    assert "control.value = value" in preset
+    assert "birthDateTimeShown =" not in preset
+    calendar_mode = javascript[javascript.index("function updateCalendarMode"):javascript.index("function setNumericValuesShown")]
+    assert "lunarMode" in calendar_mode
+    assert ".solar-date-field" in calendar_mode
+    assert ".lunar-date-field" in calendar_mode
+    assert "birthDateTimeShown" not in calendar_mode
+    assert ".birth-time-field" not in calendar_mode
+
+    html = client.get("/ziwei").text
+    assert "顯示出生年月日時分" in html
+    assert "隱藏出生年月日時分" in javascript
+    assert "運限年月日時分" not in html + javascript
+
+
+def test_birth_input_editing_still_invalidates_derived_state() -> None:
+    javascript = client.get("/static/ziwei.js").text
+    listener = javascript[javascript.index('form.addEventListener("input"'):]
+    listener = listener[:listener.index("});") + 3]
+    assert "invalidateInterpretation();" in listener
+
+
 def test_static_assets_are_available() -> None:
     assert client.get("/static/ziwei.css").status_code == 200
     assert client.get("/static/ziwei.js").status_code == 200
@@ -58,6 +159,65 @@ def test_chart_endpoint_returns_integrated_result() -> None:
     assert result["birth_data"] == PRESET_A
     assert len(result["palaces"]) == 12
     assert len(result["birth_year_transformations"]["transformations"]) == 4
+    assert len(result["major_luck"]["periods"]) == 12
+
+
+def test_phase6a_ui_has_major_luck_summary_and_table() -> None:
+    html = client.get("/ziwei").text
+    javascript = client.get("/static/ziwei.js").text
+    assert 'id="major-luck-heading">大限<' in html
+    assert 'id="major-luck-summary"' in html
+    assert 'id="major-luck-body"' in html
+    for heading in ("大限", "歲數", "地支", "宮位", "宮干支", "大限四化"):
+        assert f"<th>{heading}</th>" in html
+    for text in ("大限方向", "陰陽性別", "歲起限", "start_nominal_age", "end_nominal_age"):
+        assert text in javascript
+    assert "innerHTML" not in javascript
+
+
+def test_phase6b_ui_renders_four_transformations_for_every_major_luck_row() -> None:
+    javascript = client.get("/static/ziwei.js").text
+    assert "period_transformations" in javascript
+    assert "major_luck_index" in javascript
+    assert "transformation_type" in javascript
+    assert "star_name" in javascript
+    result = post_chart().json()["major_luck"]
+    assert len(result["period_transformations"]) == 12
+    assert sum(len(group["transformations"]) for group in result["period_transformations"]) == 48
+    first = result["period_transformations"][0]
+    assert first["major_luck_heavenly_stem"] == "戊"
+    assert [
+        (row["transformation_type"], row["star_name"])
+        for row in first["transformations"]
+    ] == [("化祿", "貪狼"), ("化權", "太陰"), ("化科", "右弼"), ("化忌", "天機")]
+
+
+def test_case_a_api_exposes_manual_major_luck_facts() -> None:
+    result = post_chart().json()["major_luck"]
+    assert (result["year_heavenly_stem"], result["year_yinyang"], result["gender"]) == ("乙", "陰", "female")
+    assert (result["direction"], result["bureau_name"], result["bureau_number"]) == ("順行", "土五局", 5)
+    assert [
+        (row["start_nominal_age"], row["end_nominal_age"], row["earthly_branch"], row["palace_name"], row["palace_ganzhi"]["heavenly_stem"] + row["palace_ganzhi"]["earthly_branch"])
+        for row in result["periods"][:5]
+    ] == [
+        (5, 14, "寅", "命宮", "戊寅"),
+        (15, 24, "卯", "父母宮", "己卯"),
+        (25, 34, "辰", "福德宮", "庚辰"),
+        (35, 44, "巳", "田宅宮", "辛巳"),
+        (45, 54, "午", "官祿宮", "壬午"),
+    ]
+
+
+def test_case_a_male_api_changes_only_gender_and_major_luck_direction() -> None:
+    female = post_chart().json()
+    male = post_chart(gender="male").json()
+    assert female["major_luck"]["direction"] == "順行"
+    assert male["major_luck"]["direction"] == "逆行"
+    female.pop("major_luck")
+    male.pop("major_luck")
+    female["birth_data"].pop("gender")
+    male["birth_data"].pop("gender")
+    assert female == male
 
 
 def test_preset_a_calendar_result_is_unchanged() -> None:
@@ -167,3 +327,96 @@ def test_frontend_calls_only_local_chart_endpoint() -> None:
 def test_openapi_exposes_chart_endpoint() -> None:
     schema = client.get("/openapi.json").json()
     assert "post" in schema["paths"]["/api/chart"]
+
+
+def test_interpret_endpoint_calculates_case_a_and_calls_interpreter_once(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    calls = []
+
+    class FakeInterpreter:
+        async def interpret(self, chart):
+            calls.append(chart)
+            return InterpretationResult.model_validate(interpretation_payload())
+
+    monkeypatch.setattr(chart_api, "ZiweiInterpreter", FakeInterpreter)
+    response = client.post("/api/interpret", json=PRESET_A)
+    assert response.status_code == 200
+    assert response.json() == interpretation_payload() | {
+        "provider": "NVIDIA",
+        "model": "z-ai/glm-5.3-flash",
+        "model_display_name": "GLM-5.3-Flash",
+    }
+    assert "NVIDIA_API_KEY" not in response.text
+    assert "reasoning_content" not in response.text
+    assert len(calls) == 1
+    assert calls[0].birth_data.model_dump(mode="json") == PRESET_A
+    assert calls[0].life_palace_branch == "寅"
+    assert calls[0].body_palace_branch == "寅"
+    assert calls[0].five_elements_bureau.bureau_name == "土五局"
+    assert len(calls[0].palaces) == 12
+
+
+def test_invalid_interpret_input_never_calls_interpreter(monkeypatch: pytest.MonkeyPatch) -> None:
+    calls = 0
+
+    class FakeInterpreter:
+        async def interpret(self, chart):
+            nonlocal calls
+            calls += 1
+            return InterpretationResult.model_validate(interpretation_payload())
+
+    monkeypatch.setattr(chart_api, "ZiweiInterpreter", FakeInterpreter)
+    response = client.post("/api/interpret", json=PRESET_A | {"birth_hour": 24})
+    assert response.status_code == 422
+    assert calls == 0
+
+
+@pytest.mark.parametrize(
+    ("error", "status_code", "code"),
+    (
+        (NvidiaClientError(NvidiaErrorCode.PERMISSION_ERROR, "unsafe detail"), 502, "PERMISSION_ERROR"),
+        (NvidiaClientError(NvidiaErrorCode.RATE_LIMIT_ERROR, "unsafe detail"), 429, "RATE_LIMIT_ERROR"),
+        (NvidiaClientError(NvidiaErrorCode.TIMEOUT, "unsafe detail"), 504, "TIMEOUT"),
+        (InterpretationParseError("unsafe parser detail"), 502, "INVALID_STRUCTURED_RESPONSE"),
+    ),
+)
+def test_interpret_endpoint_returns_safe_errors(
+    monkeypatch: pytest.MonkeyPatch, error: Exception, status_code: int, code: str,
+) -> None:
+    class FailingInterpreter:
+        async def interpret(self, chart):
+            raise error
+
+    monkeypatch.setattr(chart_api, "ZiweiInterpreter", FailingInterpreter)
+    response = client.post("/api/interpret", json=PRESET_A)
+    assert response.status_code == status_code
+    assert response.json()["detail"]["code"] == code
+    assert "unsafe" not in response.text
+
+
+def test_phase4c_ui_has_explicit_disabled_interpret_control_and_sections() -> None:
+    html = client.get("/ziwei").text
+    assert 'id="interpret-button" type="button" class="primary" disabled' in html
+    for heading in ("總覽", "十二宮解讀", "生年四化解讀", "整體分析"):
+        assert heading in html
+    assert "只供文化研究與自我反思參考" in html
+
+
+def test_phase4c_frontend_is_one_click_one_request_and_safe_text_only() -> None:
+    javascript = client.get("/static/ziwei.js").text
+    assert javascript.count('fetch("/api/interpret"') == 1
+    assert 'interpretButton.addEventListener("click"' in javascript
+    assert "解盤中，請稍候……" in javascript
+    assert "innerHTML" not in javascript
+    assert ".textContent" in javascript
+    assert 'form.addEventListener("input"' in javascript
+    for palace in ("命宮", "兄弟宮", "夫妻宮", "子女宮", "財帛宮", "疾厄宮", "遷移宮", "交友宮", "官祿宮", "田宅宮", "福德宮", "父母宮"):
+        assert palace in javascript
+    for label in ("性格", "職涯", "財務", "感情", "人際", "家庭", "優勢", "可留意的挑戰"):
+        assert label in javascript
+
+
+def test_openapi_exposes_interpret_endpoint() -> None:
+    schema = client.get("/openapi.json").json()
+    assert "post" in schema["paths"]["/api/interpret"]

@@ -1,8 +1,8 @@
-"""Deterministic birth-year Four Transformations; placement/tagging only.
+"""Shared deterministic ten-stem Four Transformations; placement/tagging only.
 
 The table follows Tiger-ZiWei's documented 《紫微斗數全書》 edition choice.
-It selects four existing star names from the primary Phase 1B year stem and
-never derives a year, creates a star, moves a star, or interprets a result.
+Birth-year, Major-Luck and Flow-Year contexts select from this one table using
+their own verified stem. None creates or moves a star or interprets a result.
 """
 
 from types import MappingProxyType
@@ -27,7 +27,7 @@ TransformationStarName = MajorStarName | AuxiliaryStarName
 # Canonical order in every row: 化祿、化權、化科、化忌.
 # 壬 uses 天府 per the primary 南陽堂《紫微斗數全書》 edition. The older
 # 《紫微斗數捷覽》/《紫微斗數全集》 左輔 reading is an edition variant.
-BIRTH_YEAR_TRANSFORMATION_TARGETS = MappingProxyType({
+TRANSFORMATION_TARGETS_BY_STEM = MappingProxyType({
     "甲": (MajorStarName.LIANZHEN, MajorStarName.POJUN,
           MajorStarName.WUQU, MajorStarName.TAIYANG),
     "乙": (MajorStarName.TIANJI, MajorStarName.TIANLIANG,
@@ -50,12 +50,15 @@ BIRTH_YEAR_TRANSFORMATION_TARGETS = MappingProxyType({
           MajorStarName.TAIYIN, MajorStarName.TANLANG),
 })
 
+# Backward-compatible Phase 2B name; both contexts reference the same object.
+BIRTH_YEAR_TRANSFORMATION_TARGETS = TRANSFORMATION_TARGETS_BY_STEM
+
 
 def transformation_targets(stem: HeavenlyStem) -> tuple[TransformationStarName, ...]:
     """Return the frozen four-name row without calculating any positions."""
-    if type(stem) is not str or stem not in BIRTH_YEAR_TRANSFORMATION_TARGETS:
+    if type(stem) is not str or stem not in TRANSFORMATION_TARGETS_BY_STEM:
         raise ValueError("year stem must be a canonical Heavenly Stem")
-    return BIRTH_YEAR_TRANSFORMATION_TARGETS[stem]
+    return TRANSFORMATION_TARGETS_BY_STEM[stem]
 
 
 def _locate_target(target: TransformationStarName, existing: list[tuple]) -> tuple:

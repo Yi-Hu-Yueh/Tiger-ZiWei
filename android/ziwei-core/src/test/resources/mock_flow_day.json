@@ -1,0 +1,50 @@
+{
+  "lunar_year": 2029,
+  "lunar_month": 1,
+  "lunar_day": 1,
+  "is_leap_month": false,
+  "day_ganzhi": {
+    "heavenly_stem": "甲",
+    "earthly_branch": "戌"
+  },
+  "flow_day_life_palace_branch": "酉",
+  "natal_host_palace": "疾厄宮",
+  "overview": "此流日可能適合穩健推進。",
+  "life_palace_analysis": "流日命宮可留意本命宿宮課題。",
+  "major_luck_context": "大限提供十年背景。",
+  "flow_year_context": "流年提供年度背景。",
+  "flow_month_context": "流月提供當月背景。",
+  "transformation_analysis": [
+    {
+      "transformation_type": "化祿",
+      "star_name": "廉貞",
+      "natal_palace_name": "財帛宮",
+      "analysis": "此流日四化可作為當日觀察重點。"
+    },
+    {
+      "transformation_type": "化權",
+      "star_name": "破軍",
+      "natal_palace_name": "遷移宮",
+      "analysis": "此流日四化可作為當日觀察重點。"
+    },
+    {
+      "transformation_type": "化科",
+      "star_name": "武曲",
+      "natal_palace_name": "命宮",
+      "analysis": "此流日四化可作為當日觀察重點。"
+    },
+    {
+      "transformation_type": "化忌",
+      "star_name": "太陽",
+      "natal_palace_name": "父母宮",
+      "analysis": "此流日四化可作為當日觀察重點。"
+    }
+  ],
+  "work": "工作可先處理明確事項。",
+  "finance": "財務可留意小額決策。",
+  "relationships": "感情可重視當日溝通。",
+  "family_and_interpersonal": "人際宜保持清楚表達。",
+  "strengths": "優勢在於聚焦。",
+  "potential_challenges": "可留意急躁。",
+  "practical_focus": "適合完成當日優先事項。"
+}

@@ -4,11 +4,11 @@ from datetime import date
 
 import sxtwl
 
-from app.models.calendar import LunarDate
+from app.models.calendar import LunarDate, SUPPORTED_GREGORIAN_START
 
 # sxtwl's solar API uses the historical Julian/Gregorian cutover. Earlier
 # dates would not match BirthData's Gregorian semantics; do not reinterpret them.
-GREGORIAN_START = date(1582, 10, 15)
+GREGORIAN_START = SUPPORTED_GREGORIAN_START
 
 
 def _solar_day(solar_date: date) -> sxtwl.Day:

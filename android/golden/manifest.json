@@ -1,0 +1,133 @@
+{
+  "files": [
+    {
+      "bytes": 100,
+      "filename": "bureau_start_ages.json",
+      "sha256": "c5eac4f0763a5e4502e5c894e8d6ff46ca6c9a1610027a52c10a4518d41b862f"
+    },
+    {
+      "bytes": 14020,
+      "filename": "flow_query_A_lunar_2025_leap6_day1.json",
+      "sha256": "53d9ce36d22ee0696788d9a710dfa8a07e064c4c1ffd0fd7faa8fac000152da0"
+    },
+    {
+      "bytes": 9731,
+      "filename": "flow_query_A_lunar_2026_month10.json",
+      "sha256": "16accd38a7a95d2d98d476ae8722a49dbada3425185ca5084ae7796c6d872b93"
+    },
+    {
+      "bytes": 14037,
+      "filename": "flow_query_A_lunar_2026_month10_day7.json",
+      "sha256": "7e40a38e68bacdece12386e6aeacb8b0e3b2c96d2a500aacc00a0cd6befa260b"
+    },
+    {
+      "bytes": 5448,
+      "filename": "flow_query_A_lunar_2026_year.json",
+      "sha256": "12427ccaedb08104af56f641842254ffd1d2b37a2393512ccceb16164f6cfecc"
+    },
+    {
+      "bytes": 13999,
+      "filename": "flow_query_A_solar_2025_07_25.json",
+      "sha256": "f19e82918355ab489d96d431b380f86385b73abdae15625b5efb7420c69b5ef3"
+    },
+    {
+      "bytes": 14017,
+      "filename": "flow_query_A_solar_2029_02_12.json",
+      "sha256": "ccb3309c998389dff0cfdc303b5f58f278233806ad26f88800fa6d45b7208740"
+    },
+    {
+      "bytes": 14285,
+      "filename": "flow_query_A_solar_2029_02_13.json",
+      "sha256": "675d5b96f46db4bb5415dafd5ba39aff6668342172e7937232e594900579ca6a"
+    },
+    {
+      "bytes": 4489,
+      "filename": "flow_year_A_2026.json",
+      "sha256": "d0e78f00ca6c0cb22ed5cd914c77d6723ce3f0efe3203b102daf77e748dad8b0"
+    },
+    {
+      "bytes": 4745,
+      "filename": "flow_year_A_2029.json",
+      "sha256": "a6c24b1386e867d1c54f808fd08ac0e87ae654b536c19e949b7fa32a7cefc351"
+    },
+    {
+      "bytes": 4741,
+      "filename": "flow_year_A_2032.json",
+      "sha256": "b02fb10f2fb6c9cdcad5e375f1ba04a9d75b9344e5a1378025ec4290b1a0f9f0"
+    },
+    {
+      "bytes": 4750,
+      "filename": "flow_year_A_2039.json",
+      "sha256": "a3703b8d1f3e02fc7dfd67a35734d858a0902cf224916878d826987fd67d2de3"
+    },
+    {
+      "bytes": 4750,
+      "filename": "flow_year_A_male_2039.json",
+      "sha256": "ab35c6ea8caf89def3ece9b32743c10e910c449eceb62210f5db233cc7019af0"
+    },
+    {
+      "bytes": 23300,
+      "filename": "interpretation_facts_flow_day.json",
+      "sha256": "0b28b6e1bf1f7af90da06ae03084d7decdae47f2d7eedd19ad02eef5d98e70e4"
+    },
+    {
+      "bytes": 18976,
+      "filename": "interpretation_facts_flow_month.json",
+      "sha256": "5b4aec677f6e36ee757470bfad533c1ade75e44b22c064fa233290665794c198"
+    },
+    {
+      "bytes": 13582,
+      "filename": "interpretation_facts_flow_year.json",
+      "sha256": "916f1468942a509f5a11080c6a9324b1d68334c9499785b6d626f0358bd30469"
+    },
+    {
+      "bytes": 8373,
+      "filename": "interpretation_facts_major_luck.json",
+      "sha256": "3a3184636b813a0550ac5b2794e7c5aedd5738f449031b918a323a2b4d5a8900"
+    },
+    {
+      "bytes": 6232,
+      "filename": "interpretation_facts_natal.json",
+      "sha256": "f9285f9ec34ceb37ee89331a4e31919e9ea10acb732e89c75f63caa4bc493f1e"
+    },
+    {
+      "bytes": 32283,
+      "filename": "natal_A.json",
+      "sha256": "a1a741a981bea05efb8d54fff1ba91cc0f8bd3d8d5e26b5d63b964048be9cdea"
+    },
+    {
+      "bytes": 32284,
+      "filename": "natal_A_male.json",
+      "sha256": "d4cd1a1b3cbccb9ae730f121e1fa458b8c0d02c05d4cc419cf20062c3b80c54a"
+    },
+    {
+      "bytes": 32312,
+      "filename": "natal_B.json",
+      "sha256": "73501989b010a8de7c594fdf9bc9142abdb2b107395339f5c8dd0e40f7e9935f"
+    },
+    {
+      "bytes": 32294,
+      "filename": "natal_C.json",
+      "sha256": "6cea28abc01c81270ee0c9503e3aed66d3945991b46ce4c9ea87e4e0e672cc66"
+    },
+    {
+      "bytes": 32296,
+      "filename": "natal_L.json",
+      "sha256": "821a2c21c5d0410a08dcab5b7666bd0a66a3d84327dad9ea14ee0d88b86853ec"
+    },
+    {
+      "bytes": 32271,
+      "filename": "natal_Z.json",
+      "sha256": "9506945633bda9649e10859bd7e478cb3847e7a5e46485816a574cb1944db379"
+    },
+    {
+      "bytes": 775,
+      "filename": "transformation_targets.json",
+      "sha256": "be4de1f03e2d5c92ff266f29750332e6d0b6ff769eae0726e73cac2110bc1dea"
+    }
+  ],
+  "fixture_count": 25,
+  "format": 1,
+  "source": "accepted Tiger-ZiWei Python engine",
+  "source_head": "36a6254b59df94355a03f0de0e6f05a375f234a0"
+}

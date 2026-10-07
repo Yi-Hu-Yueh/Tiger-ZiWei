@@ -3,7 +3,7 @@
 from pathlib import Path
 
 from fastapi.testclient import TestClient
-from PIL import Image
+from PIL import Image, ImageDraw
 import pytest
 
 import app.api.chart as chart_api
@@ -12,6 +12,7 @@ from app.chart.renderer import (
     CANVAS_SIZE,
     CENTER_SECTION_TITLES,
     _center_details,
+    _major_luck_age_text,
     _star_display_items,
     find_chinese_font,
     render_chart_png,
@@ -108,6 +109,34 @@ def test_render_data_contains_all_palaces_and_stars() -> None:
     assert {palace.earthly_branch for palace in chart.palaces} == set(BRANCH_GRID_POSITIONS)
     assert sum(len(_star_display_items(chart, palace, major=True)) for palace in chart.palaces) == 14
     assert sum(len(_star_display_items(chart, palace, major=False)) for palace in chart.palaces) == 14
+
+
+def test_png_data_has_exactly_one_major_luck_age_range_per_palace() -> None:
+    chart = calculate_basic_chart(birth_data("A"))
+    displayed = {_major_luck_age_text(chart, palace.earthly_branch) for palace in chart.palaces}
+    assert displayed == {
+        "5–14歲", "15–24歲", "25–34歲", "35–44歲", "45–54歲", "55–64歲",
+        "65–74歲", "75–84歲", "85–94歲", "95–104歲", "105–114歲", "115–124歲",
+    }
+    assert _major_luck_age_text(chart, "寅") == "5–14歲"
+    assert _major_luck_age_text(chart, "卯") == "15–24歲"
+
+
+def test_png_actually_draws_all_twelve_major_luck_labels(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    captured: list[str] = []
+    original = ImageDraw.ImageDraw.text
+
+    def record_text(draw, xy, text, *args, **kwargs):
+        if isinstance(text, str) and text.endswith("歲") and "–" in text:
+            captured.append(text)
+        return original(draw, xy, text, *args, **kwargs)
+
+    monkeypatch.setattr(ImageDraw.ImageDraw, "text", record_text)
+    render_chart_png(calculate_basic_chart(birth_data("A")), tmp_path)
+    assert captured == [
+        "35–44歲", "45–54歲", "55–64歲", "65–74歲", "25–34歲", "75–84歲",
+        "15–24歲", "85–94歲", "5–14歲", "115–124歲", "105–114歲", "95–104歲",
+    ]
 
 
 def test_a_render_hierarchy_keeps_required_locations_and_inline_transformations() -> None:
@@ -207,6 +236,7 @@ def test_ziwei_page_keeps_tables_and_adds_png_preview() -> None:
 def test_frontend_calls_png_api_without_external_service() -> None:
     javascript = client.get("/static/ziwei.js").text
     assert 'fetch("/api/chart/png"' in javascript
-    assert "NVIDIA" not in javascript
+    assert "NVIDIA_API_KEY" not in javascript
+    assert "integrate.api.nvidia.com" not in javascript
     assert "http://" not in javascript
     assert "https://" not in javascript

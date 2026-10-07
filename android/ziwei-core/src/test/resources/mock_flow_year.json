@@ -1,0 +1,65 @@
+{
+  "target_year": 2029,
+  "flow_year_ganzhi": {
+    "heavenly_stem": "己",
+    "earthly_branch": "酉"
+  },
+  "nominal_age": 5,
+  "flow_life_palace_branch": "酉",
+  "flow_life_palace_natal_host": {
+    "palace_name": "疾厄宮",
+    "earthly_branch": "酉",
+    "palace_ganzhi": {
+      "heavenly_stem": "乙",
+      "earthly_branch": "酉"
+    }
+  },
+  "active_major_luck_summary": {
+    "status": "active",
+    "major_luck_index": 1,
+    "start_nominal_age": 5,
+    "end_nominal_age": 14,
+    "palace_name": "命宮",
+    "earthly_branch": "寅",
+    "palace_ganzhi": {
+      "heavenly_stem": "戊",
+      "earthly_branch": "寅"
+    }
+  },
+  "overview": "2029 年可在本命基線與大限背景下，務實觀察此流年的重點。",
+  "flow_life_palace_analysis": "流年命宮落本命疾厄宮，較適合留意節奏與身心負荷。",
+  "major_luck_context": "目前為命宮大限，可把十年自我定位背景和年度課題分開理解。",
+  "transformation_analysis": [
+    {
+      "transformation_type": "化祿",
+      "star_name": "武曲",
+      "natal_palace_name": "命宮",
+      "analysis": "武曲化祿可留意資源與執行力。"
+    },
+    {
+      "transformation_type": "化權",
+      "star_name": "貪狼",
+      "natal_palace_name": "夫妻宮",
+      "analysis": "貪狼化權可留意互動中的主動性。"
+    },
+    {
+      "transformation_type": "化科",
+      "star_name": "天梁",
+      "natal_palace_name": "父母宮",
+      "analysis": "天梁化科可能凸顯經驗與支持。"
+    },
+    {
+      "transformation_type": "化忌",
+      "star_name": "文曲",
+      "natal_palace_name": "福德宮",
+      "analysis": "文曲化忌提醒釐清想法與表達。"
+    }
+  ],
+  "career": "職涯上適合以清楚步驟累積成果。",
+  "finance": "財務可重視紀律與彈性。",
+  "relationships": "感情互動可留意期待與界線。",
+  "family_and_interpersonal": "家庭與人際宜增加具體溝通。",
+  "strengths": "較能以實際行動整理資源。",
+  "potential_challenges": "可留意壓力集中與反覆思量。",
+  "practical_focus": "建議將重點放在可持續的年度節奏。"
+}

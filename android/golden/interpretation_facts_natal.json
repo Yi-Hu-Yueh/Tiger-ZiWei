@@ -1,0 +1,257 @@
+{
+  "birth": {
+    "birthplace": "Taipei",
+    "gender": "female",
+    "gregorian_date": "2025-01-29",
+    "name": "Case A",
+    "supplied_civil_time": "00:30"
+  },
+  "birth_year_transformations": [
+    {
+      "earthly_branch": "巳",
+      "palace_name": "田宅宮",
+      "star_category": "major",
+      "star_name": "天機",
+      "transformation": "化祿"
+    },
+    {
+      "earthly_branch": "卯",
+      "palace_name": "父母宮",
+      "star_category": "major",
+      "star_name": "天梁",
+      "transformation": "化權"
+    },
+    {
+      "earthly_branch": "午",
+      "palace_name": "官祿宮",
+      "star_category": "major",
+      "star_name": "紫微",
+      "transformation": "化科"
+    },
+    {
+      "earthly_branch": "亥",
+      "palace_name": "子女宮",
+      "star_category": "major",
+      "star_name": "太陰",
+      "transformation": "化忌"
+    }
+  ],
+  "calendar": {
+    "day_ganzhi": "戊戌",
+    "effective_natal_month": 1,
+    "hour_ganzhi": "壬子",
+    "lunar_date": {
+      "day": 1,
+      "is_leap_month": false,
+      "month": 1,
+      "year": 2025
+    },
+    "month_ganzhi": "丁丑",
+    "year_ganzhi": "乙巳"
+  },
+  "core": {
+    "body_palace_branch": "寅",
+    "body_palace_host": "命宮",
+    "five_elements_bureau": "土五局",
+    "life_palace_branch": "寅"
+  },
+  "palaces": [
+    {
+      "auxiliary_stars": [
+        "天魁"
+      ],
+      "birth_year_transformations": [],
+      "earthly_branch": "子",
+      "has_body_palace": false,
+      "is_life_palace": false,
+      "major_stars": [
+        "貪狼"
+      ],
+      "palace_ganzhi": "戊子",
+      "palace_name": "夫妻宮"
+    },
+    {
+      "auxiliary_stars": [],
+      "birth_year_transformations": [],
+      "earthly_branch": "丑",
+      "has_body_palace": false,
+      "is_life_palace": false,
+      "major_stars": [
+        "天同",
+        "巨門"
+      ],
+      "palace_ganzhi": "己丑",
+      "palace_name": "兄弟宮"
+    },
+    {
+      "auxiliary_stars": [
+        "陀羅"
+      ],
+      "birth_year_transformations": [],
+      "earthly_branch": "寅",
+      "has_body_palace": true,
+      "is_life_palace": true,
+      "major_stars": [
+        "武曲",
+        "天相"
+      ],
+      "palace_ganzhi": "戊寅",
+      "palace_name": "命宮"
+    },
+    {
+      "auxiliary_stars": [
+        "祿存",
+        "火星"
+      ],
+      "birth_year_transformations": [
+        {
+          "earthly_branch": "卯",
+          "palace_name": "父母宮",
+          "star_category": "major",
+          "star_name": "天梁",
+          "transformation": "化權"
+        }
+      ],
+      "earthly_branch": "卯",
+      "has_body_palace": false,
+      "is_life_palace": false,
+      "major_stars": [
+        "太陽",
+        "天梁"
+      ],
+      "palace_ganzhi": "己卯",
+      "palace_name": "父母宮"
+    },
+    {
+      "auxiliary_stars": [
+        "左輔",
+        "文曲",
+        "擎羊"
+      ],
+      "birth_year_transformations": [],
+      "earthly_branch": "辰",
+      "has_body_palace": false,
+      "is_life_palace": false,
+      "major_stars": [
+        "七殺"
+      ],
+      "palace_ganzhi": "庚辰",
+      "palace_name": "福德宮"
+    },
+    {
+      "auxiliary_stars": [],
+      "birth_year_transformations": [
+        {
+          "earthly_branch": "巳",
+          "palace_name": "田宅宮",
+          "star_category": "major",
+          "star_name": "天機",
+          "transformation": "化祿"
+        }
+      ],
+      "earthly_branch": "巳",
+      "has_body_palace": false,
+      "is_life_palace": false,
+      "major_stars": [
+        "天機"
+      ],
+      "palace_ganzhi": "辛巳",
+      "palace_name": "田宅宮"
+    },
+    {
+      "auxiliary_stars": [],
+      "birth_year_transformations": [
+        {
+          "earthly_branch": "午",
+          "palace_name": "官祿宮",
+          "star_category": "major",
+          "star_name": "紫微",
+          "transformation": "化科"
+        }
+      ],
+      "earthly_branch": "午",
+      "has_body_palace": false,
+      "is_life_palace": false,
+      "major_stars": [
+        "紫微"
+      ],
+      "palace_ganzhi": "壬午",
+      "palace_name": "官祿宮"
+    },
+    {
+      "auxiliary_stars": [],
+      "birth_year_transformations": [],
+      "earthly_branch": "未",
+      "has_body_palace": false,
+      "is_life_palace": false,
+      "major_stars": [],
+      "palace_ganzhi": "癸未",
+      "palace_name": "交友宮"
+    },
+    {
+      "auxiliary_stars": [
+        "天鉞"
+      ],
+      "birth_year_transformations": [],
+      "earthly_branch": "申",
+      "has_body_palace": false,
+      "is_life_palace": false,
+      "major_stars": [
+        "破軍"
+      ],
+      "palace_ganzhi": "甲申",
+      "palace_name": "遷移宮"
+    },
+    {
+      "auxiliary_stars": [],
+      "birth_year_transformations": [],
+      "earthly_branch": "酉",
+      "has_body_palace": false,
+      "is_life_palace": false,
+      "major_stars": [],
+      "palace_ganzhi": "乙酉",
+      "palace_name": "疾厄宮"
+    },
+    {
+      "auxiliary_stars": [
+        "右弼",
+        "文昌",
+        "鈴星"
+      ],
+      "birth_year_transformations": [],
+      "earthly_branch": "戌",
+      "has_body_palace": false,
+      "is_life_palace": false,
+      "major_stars": [
+        "廉貞",
+        "天府"
+      ],
+      "palace_ganzhi": "丙戌",
+      "palace_name": "財帛宮"
+    },
+    {
+      "auxiliary_stars": [
+        "天馬",
+        "地空",
+        "地劫"
+      ],
+      "birth_year_transformations": [
+        {
+          "earthly_branch": "亥",
+          "palace_name": "子女宮",
+          "star_category": "major",
+          "star_name": "太陰",
+          "transformation": "化忌"
+        }
+      ],
+      "earthly_branch": "亥",
+      "has_body_palace": false,
+      "is_life_palace": false,
+      "major_stars": [
+        "太陰"
+      ],
+      "palace_ganzhi": "丁亥",
+      "palace_name": "子女宮"
+    }
+  ]
+}

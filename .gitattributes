@@ -1,0 +1,4 @@
+# Frozen golden fixtures are byte-hashed; never apply checkout line-ending conversion.
+/android/golden/*.json -text
+# The Gradle Unix launcher must retain Unix line endings.
+/android/gradlew text eol=lf

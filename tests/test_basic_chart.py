@@ -72,7 +72,10 @@ def test_determinism_roundtrip_and_gender_independence(solar,hour,minute) -> Non
     assert a.model_dump_json(round_trip=True) == c.model_dump_json(round_trip=True) == d.model_dump_json(round_trip=True)
     assert BasicChartResult.model_validate_json(a.model_dump_json(round_trip=True)) == a
     male = calculate_basic_chart(birth(solar,hour,minute,"male"))
-    assert a.model_dump(exclude={"birth_data"}) == male.model_dump(exclude={"birth_data"})
+    assert a.model_dump(exclude={"birth_data", "major_luck"}) == male.model_dump(
+        exclude={"birth_data", "major_luck"}
+    )
+    assert a.major_luck.direction != male.major_luck.direction
     female_input,male_input = a.birth_data.model_dump(),male.birth_data.model_dump()
     assert female_input.pop("gender") == "female"
     assert male_input.pop("gender") == "male"

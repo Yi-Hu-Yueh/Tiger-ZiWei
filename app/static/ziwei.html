@@ -30,6 +30,16 @@
       </div>
 
       <form id="chart-form" novalidate>
+        <fieldset class="calendar-selector">
+          <legend>日期類型</legend>
+          <div class="birth-date-time-toolbar">
+            <div class="calendar-options">
+              <label class="radio-option"><input id="calendar-solar" name="calendar_type" type="radio" value="solar" checked> 國曆</label>
+              <label class="radio-option"><input id="calendar-lunar" name="calendar_type" type="radio" value="lunar"> 農曆</label>
+            </div>
+            <button id="birth-date-time-toggle" type="button" class="secondary" aria-pressed="false" aria-controls="birth_year birth_month birth_day lunar_year lunar_month lunar_day birth_hour birth_minute">顯示出生年月日時分</button>
+          </div>
+        </fieldset>
         <div class="form-grid">
           <label>姓名（選填）<input id="name" name="name" autocomplete="name"></label>
           <label>性別
@@ -38,17 +48,46 @@
               <option value="female">女</option>
             </select>
           </label>
-          <label>西元年<input id="birth_year" name="birth_year" type="number" min="1900" max="2100" required></label>
-          <label>月<input id="birth_month" name="birth_month" type="number" min="1" max="12" required></label>
-          <label>日<input id="birth_day" name="birth_day" type="number" min="1" max="31" required></label>
-          <label>時<input id="birth_hour" name="birth_hour" type="number" min="0" max="23" required></label>
-          <label>分<input id="birth_minute" name="birth_minute" type="number" min="0" max="59" required></label>
+          <label class="solar-date-field">西元年<input id="birth_year" name="birth_year" type="password" min="1900" max="2100" inputmode="numeric" pattern="[0-9]*" required></label>
+          <label class="solar-date-field">國曆月<input id="birth_month" name="birth_month" type="password" min="1" max="12" inputmode="numeric" pattern="[0-9]*" required></label>
+          <label class="solar-date-field">國曆日<input id="birth_day" name="birth_day" type="password" min="1" max="31" inputmode="numeric" pattern="[0-9]*" required></label>
+          <label class="lunar-date-field" hidden>農曆年<input id="lunar_year" name="lunar_year" type="password" min="1900" max="2100" inputmode="numeric" pattern="[0-9]*"></label>
+          <label class="lunar-date-field" hidden>農曆月<input id="lunar_month" name="lunar_month" type="password" min="1" max="12" inputmode="numeric" pattern="[0-9]*"></label>
+          <label class="lunar-date-field" hidden>農曆日<input id="lunar_day" name="lunar_day" type="password" min="1" max="30" inputmode="numeric" pattern="[0-9]*"></label>
+          <label class="lunar-date-field" hidden>是否閏月
+            <select id="is_leap_month" name="is_leap_month">
+              <option value="false">否</option>
+              <option value="true">是</option>
+            </select>
+          </label>
+          <label class="birth-time-field">時<input id="birth_hour" name="birth_hour" type="password" min="0" max="23" inputmode="numeric" pattern="[0-9]*" required></label>
+          <label class="birth-time-field">分<input id="birth_minute" name="birth_minute" type="password" min="0" max="59" inputmode="numeric" pattern="[0-9]*" required></label>
           <label class="wide">出生地<input id="birthplace" name="birthplace" required></label>
         </div>
         <p class="notice">目前使用輸入的民用／標準時間。真太陽時尚未實作。</p>
         <div id="error-message" class="error" role="alert" hidden></div>
         <button id="submit-button" type="submit" class="primary">排盤</button>
       </form>
+    </section>
+
+    <section class="card ai-settings-card" aria-labelledby="ai-settings-heading">
+      <div class="section-heading">
+        <div>
+          <h2 id="ai-settings-heading">AI 設定</h2>
+          <p class="muted">只套用於明確按下解讀按鈕的請求，不影響排盤與運限計算。</p>
+        </div>
+      </div>
+      <div class="ai-settings-grid">
+        <label>模型
+          <select id="ai-model-select" name="ai_model">
+            <option value="z-ai/glm-5.3-flash" selected>GLM-5.3-Flash</option>
+          </select>
+        </label>
+        <label>NVIDIA API KEY
+          <input id="nvidia-api-key" name="nvidia_api_key" type="password" placeholder="nvapi-..." autocomplete="off" spellcheck="false">
+        </label>
+      </div>
+      <p class="muted ai-settings-note">金鑰只保留在目前頁面記憶體中；留白時由伺服器既有設定接手。</p>
     </section>
 
     <section id="result" hidden>
@@ -71,10 +110,266 @@
         </div>
       </section>
 
+      <section class="card interpretation-card" aria-labelledby="interpretation-heading">
+        <div class="section-heading">
+          <div>
+            <h2 id="interpretation-heading">本命解讀</h2>
+            <p class="muted">先確認命盤資料，再由 NVIDIA 模型進行一次結構化解讀。</p>
+          </div>
+          <div class="preview-actions">
+            <button id="interpret-button" type="button" class="primary" disabled>解盤</button>
+            <button id="report-button" type="button" class="secondary" disabled>下載 Word 報告</button>
+          </div>
+        </div>
+        <p class="notice">本解讀屬傳統紫微斗數觀點，只供文化研究與自我反思參考，不代表科學結論，也不應取代醫療、法律或財務等專業建議。</p>
+        <p id="interpret-status" class="muted" role="status" hidden></p>
+        <p id="report-status" class="muted" role="status" hidden></p>
+        <div id="interpret-error" class="error" role="alert" hidden></div>
+        <div id="interpretation-result" hidden>
+          <p id="interpret-model" class="ai-model-metadata"></p>
+          <section class="interpretation-section" aria-labelledby="overview-heading">
+            <h3 id="overview-heading">總覽</h3>
+            <p id="interpret-overview"></p>
+          </section>
+          <section class="interpretation-section" aria-labelledby="palace-interpretation-heading">
+            <h3 id="palace-interpretation-heading">十二宮解讀</h3>
+            <div id="palace-interpretations" class="interpretation-grid"></div>
+          </section>
+          <section class="interpretation-section" aria-labelledby="transformation-interpretation-heading">
+            <h3 id="transformation-interpretation-heading">生年四化解讀</h3>
+            <p id="interpret-transformations"></p>
+          </section>
+          <section class="interpretation-section" aria-labelledby="overall-heading">
+            <h3 id="overall-heading">整體分析</h3>
+            <dl id="interpret-overall" class="overall-grid"></dl>
+          </section>
+        </div>
+      </section>
+
       <section class="card" aria-labelledby="summary-heading">
         <h2 id="summary-heading">命盤摘要</h2>
         <dl id="summary" class="summary-grid"></dl>
       </section>
+
+      <section class="card table-card" aria-labelledby="major-luck-heading">
+        <h2 id="major-luck-heading">大限</h2>
+        <dl id="major-luck-summary" class="summary-grid"></dl>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>大限</th><th>歲數</th><th>地支</th><th>宮位</th><th>宮干支</th><th>大限四化</th></tr></thead>
+            <tbody id="major-luck-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card interpretation-card" aria-labelledby="major-luck-interpretation-heading">
+        <div class="section-heading">
+          <div>
+            <h2 id="major-luck-interpretation-heading">大限解讀</h2>
+            <p class="muted">明確選擇一個大限後，再由 NVIDIA 模型解讀該十年期間。</p>
+          </div>
+          <div class="flow-year-controls">
+            <label for="major-luck-select">選擇大限</label>
+            <select id="major-luck-select" disabled>
+              <option value="">請先排盤</option>
+            </select>
+            <button id="major-luck-interpret-button" type="button" class="primary" disabled>解讀大限</button>
+          </div>
+        </div>
+        <p class="notice">只解讀所選大限的既有確定性資料，不會自動選擇目前大限，也不提供流年事件預測。</p>
+        <p id="major-luck-interpret-status" class="muted" role="status" hidden></p>
+        <div id="major-luck-interpret-error" class="error" role="alert" hidden></div>
+        <div id="major-luck-interpretation-result" hidden>
+          <p id="major-luck-interpret-model" class="ai-model-metadata"></p>
+          <dl id="major-luck-interpretation-summary" class="summary-grid"></dl>
+          <section class="interpretation-section" aria-labelledby="major-luck-overview-heading">
+            <h3 id="major-luck-overview-heading">大限總覽</h3>
+            <p id="major-luck-overview"></p>
+          </section>
+          <section class="interpretation-section" aria-labelledby="major-luck-host-heading">
+            <h3 id="major-luck-host-heading">大限所在宮分析</h3>
+            <p id="major-luck-host-analysis"></p>
+          </section>
+          <section class="interpretation-section" aria-labelledby="major-luck-transformation-analysis-heading">
+            <h3 id="major-luck-transformation-analysis-heading">大限四化分析</h3>
+            <div id="major-luck-transformation-analysis" class="interpretation-grid"></div>
+          </section>
+          <section class="interpretation-section" aria-labelledby="major-luck-overall-heading">
+            <h3 id="major-luck-overall-heading">大限重點</h3>
+            <dl id="major-luck-interpretation-overall" class="overall-grid"></dl>
+          </section>
+        </div>
+      </section>
+
+    </section>
+
+      <section class="card table-card" aria-labelledby="flow-date-heading">
+        <div class="section-heading">
+          <div>
+            <h2 id="flow-date-heading">運限查詢</h2>
+            <p class="muted">國曆模式請完整輸入年月日，系統會轉換為農曆後計算；農曆模式可只輸入年、年月，或年月日。</p>
+          </div>
+        </div>
+        <fieldset class="calendar-selector flow-query-selector">
+          <legend>查詢日期類型</legend>
+          <div class="calendar-options">
+            <label class="radio-option"><input id="flow-query-solar" name="flow_query_mode" type="radio" value="solar" checked> 國曆</label>
+            <label class="radio-option"><input id="flow-query-lunar" name="flow_query_mode" type="radio" value="lunar"> 農曆</label>
+          </div>
+        </fieldset>
+        <div id="flow-date-fields" class="flow-date-fields">
+          <label class="flow-solar-field">西元年<input id="target-solar-year" type="number" min="1583" max="9999" inputmode="numeric" autocomplete="off" required></label>
+          <label class="flow-solar-field">國曆月<input id="target-solar-month" type="number" min="1" max="12" inputmode="numeric" autocomplete="off" required></label>
+          <label class="flow-solar-field">國曆日<input id="target-solar-day" type="number" min="1" max="31" inputmode="numeric" autocomplete="off" required></label>
+          <label class="flow-lunar-field" hidden>農曆年<input id="target-lunar-year" type="number" min="1583" max="9999" inputmode="numeric" autocomplete="off"></label>
+          <label class="flow-lunar-field" hidden>農曆月（選填）<input id="target-lunar-month" type="number" min="1" max="12" inputmode="numeric" autocomplete="off"></label>
+          <label class="flow-lunar-field" hidden>農曆日（選填）<input id="target-lunar-day" type="number" min="1" max="30" inputmode="numeric" autocomplete="off"></label>
+          <label class="flow-lunar-field" hidden>是否閏月
+            <select id="target-is-leap-month">
+              <option value="false">否</option>
+              <option value="true">是</option>
+            </select>
+          </label>
+          <div class="flow-date-action">
+            <button id="flow-date-button" type="button" class="primary" disabled>計算流年／流月／流日</button>
+          </div>
+        </div>
+        <p id="flow-year-status" class="muted" role="status" hidden></p>
+        <div id="flow-year-error" class="error" role="alert" hidden></div>
+        <div id="flow-year-result" hidden>
+          <section class="interpretation-section" aria-labelledby="flow-date-summary-heading">
+            <h3 id="flow-date-summary-heading">運限查詢時間</h3>
+            <dl id="flow-date-summary" class="summary-grid"></dl>
+          </section>
+          <section class="interpretation-section" aria-labelledby="flow-year-heading">
+            <h3 id="flow-year-heading">流年</h3>
+          <dl id="flow-year-summary" class="summary-grid"></dl>
+          <section class="interpretation-section" aria-labelledby="flow-year-transformations-heading">
+            <h3 id="flow-year-transformations-heading">流年四化</h3>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>四化</th><th>星曜</th><th>類型</th><th>所落本命宮</th><th>地支</th></tr></thead>
+                <tbody id="flow-year-transformation-body"></tbody>
+              </table>
+            </div>
+          </section>
+          <div class="table-scroll">
+            <table>
+              <thead><tr><th>流年宮位</th><th>地支</th><th>所落本命宮</th><th>本命宮干支</th></tr></thead>
+              <tbody id="flow-year-body"></tbody>
+            </table>
+          </div>
+          </section>
+          <section class="interpretation-section" aria-labelledby="flow-year-interpretation-heading">
+            <div class="section-heading">
+              <div>
+                <h3 id="flow-year-interpretation-heading">流年解讀</h3>
+                <p class="muted">先核對上方確定性流年資料，再明確要求解讀這一年。</p>
+              </div>
+              <button id="flow-year-interpret-button" type="button" class="primary" disabled>解讀流年</button>
+            </div>
+            <p id="flow-year-interpret-status" class="muted" role="status" hidden></p>
+            <div id="flow-year-interpret-error" class="error" role="alert" hidden></div>
+            <div id="flow-year-interpretation-result" hidden>
+              <p id="flow-year-interpret-model" class="ai-model-metadata"></p>
+              <dl id="flow-year-interpretation-summary" class="summary-grid"></dl>
+              <section class="interpretation-section" aria-labelledby="flow-year-overview-heading">
+                <h3 id="flow-year-overview-heading">流年總覽</h3>
+                <p id="flow-year-overview"></p>
+              </section>
+              <section class="interpretation-section" aria-labelledby="flow-year-life-analysis-heading">
+                <h3 id="flow-year-life-analysis-heading">流年命宮分析</h3>
+                <p id="flow-year-life-analysis"></p>
+              </section>
+              <section class="interpretation-section" aria-labelledby="flow-year-major-luck-context-heading">
+                <h3 id="flow-year-major-luck-context-heading">大限背景</h3>
+                <p id="flow-year-major-luck-context"></p>
+              </section>
+              <section class="interpretation-section" aria-labelledby="flow-year-transformation-analysis-heading">
+                <h3 id="flow-year-transformation-analysis-heading">流年四化分析</h3>
+                <div id="flow-year-transformation-analysis" class="interpretation-grid"></div>
+              </section>
+              <section class="interpretation-section" aria-labelledby="flow-year-overall-heading">
+                <h3 id="flow-year-overall-heading">流年重點</h3>
+                <dl id="flow-year-interpretation-overall" class="overall-grid"></dl>
+              </section>
+            </div>
+          </section>
+        </div>
+          <section id="flow-month-section" class="interpretation-section" aria-labelledby="flow-month-heading">
+            <div class="section-heading">
+              <h3 id="flow-month-heading">流月</h3>
+              <button id="flow-month-interpret-button" type="button" class="primary" disabled>解讀流月</button>
+            </div>
+            <div id="flow-month-facts" hidden>
+            <dl id="flow-month-summary" class="summary-grid"></dl>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>流月宮位</th><th>地支</th><th>所落本命宮</th><th>本命宮干支</th></tr></thead>
+                <tbody id="flow-month-body"></tbody>
+              </table>
+            </div>
+            <h3>流月四化</h3>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>四化</th><th>星曜</th><th>類型</th><th>所落本命宮</th><th>地支</th></tr></thead>
+                <tbody id="flow-month-transformation-body"></tbody>
+              </table>
+            </div>
+            </div>
+            <p id="flow-month-interpret-status" class="muted" role="status" hidden></p>
+            <div id="flow-month-interpret-error" class="error" role="alert" hidden></div>
+            <h3 id="flow-month-interpretation-heading">流月解讀</h3>
+            <div id="flow-month-interpretation-result" hidden>
+              <p id="flow-month-interpret-model" class="ai-model-metadata"></p>
+              <dl id="flow-month-interpretation-summary" class="summary-grid"></dl>
+              <h3>流月總覽</h3><p id="flow-month-overview"></p>
+              <h3>流月命宮分析</h3><p id="flow-month-life-analysis"></p>
+              <h3>大限背景</h3><p id="flow-month-major-luck-context"></p>
+              <h3>流年背景</h3><p id="flow-month-flow-year-context"></p>
+              <h3>流月四化分析</h3><div id="flow-month-transformation-analysis" class="interpretation-grid"></div>
+              <h3>流月重點</h3><dl id="flow-month-interpretation-overall" class="overall-grid"></dl>
+            </div>
+          </section>
+          <section id="flow-day-section" class="interpretation-section" aria-labelledby="flow-day-heading">
+            <div class="section-heading">
+              <h3 id="flow-day-heading">流日</h3>
+              <button id="flow-day-interpret-button" type="button" class="primary" disabled>解讀流日</button>
+            </div>
+            <div id="flow-day-facts" hidden>
+            <dl id="flow-day-summary" class="summary-grid"></dl>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>流日宮位</th><th>地支</th><th>所落本命宮</th><th>本命宮干支</th></tr></thead>
+                <tbody id="flow-day-body"></tbody>
+              </table>
+            </div>
+            <h3>流日四化</h3>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>四化</th><th>星曜</th><th>類型</th><th>所落本命宮</th><th>地支</th></tr></thead>
+                <tbody id="flow-day-transformation-body"></tbody>
+              </table>
+            </div>
+            </div>
+            <p id="flow-day-interpret-status" class="muted" role="status" hidden></p>
+            <div id="flow-day-interpret-error" class="error" role="alert" hidden></div>
+            <h3 id="flow-day-interpretation-heading">流日解讀</h3>
+            <div id="flow-day-interpretation-result" hidden>
+              <p id="flow-day-interpret-model" class="ai-model-metadata"></p>
+              <dl id="flow-day-interpretation-summary" class="summary-grid"></dl>
+              <h3>流日總覽</h3><p id="flow-day-overview"></p>
+              <h3>流日命宮分析</h3><p id="flow-day-life-analysis"></p>
+              <h3>大限背景</h3><p id="flow-day-major-luck-context"></p>
+              <h3>流年背景</h3><p id="flow-day-flow-year-context"></p>
+              <h3>流月背景</h3><p id="flow-day-flow-month-context"></p>
+              <h3>流日四化分析</h3><div id="flow-day-transformation-analysis" class="interpretation-grid"></div>
+              <h3>流日重點</h3><dl id="flow-day-interpretation-overall" class="overall-grid"></dl>
+            </div>
+          </section>
+      </section>
+
+    <section id="result-tail" hidden>
 
       <section class="card table-card" aria-labelledby="palace-heading">
         <h2 id="palace-heading">十二宮</h2>
@@ -103,8 +398,13 @@
         <li>年界：農曆正月初一，不以立春為界。</li>
         <li>時間：民用／標準時間；真太陽時尚未實作。</li>
         <li>晚子時：23:xx 不換日。</li>
-        <li>閏月：Tiger-ZiWei 採整個閏月按次月處理本命月規則。</li>
+        <li>閏月：Tiger-ZiWei 採整個閏月按次月處理本命月規則；流月亦沿用相同有效月份規則。</li>
         <li>壬年四化採：天梁化祿、紫微化權、天府化科、武曲化忌。</li>
+        <li>大限：命宮為第一限，五行局數為起限虛歲；陽男陰女順行、陰男陽女逆行，每限十個虛歲。</li>
+        <li>流年：使用明確輸入的農曆年，以正月初一為年界；流年命宮落在該年地支，虛歲為目標農曆年減出生農曆年加一。</li>
+        <li>流月：由流年命宮、出生時支、出生有效月與目標有效月依採用公式定位；每月順行一宮。</li>
+        <li>流日：農曆初一與流月命宮相同，其後每日順行一宮；23:xx 不換日。</li>
+        <li>版本差異：部分《紫微斗數全書》傳本由命前／命後一宮起首；本專案不採該法。</li>
         <li>LLM 不參與排盤；所有結果均由本地確定性程式計算。</li>
       </ul>
     </section>

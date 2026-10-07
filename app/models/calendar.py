@@ -13,6 +13,7 @@ HEAVENLY_STEMS: tuple[HeavenlyStem, ...] = (
 EARTHLY_BRANCHES: tuple[EarthlyBranch, ...] = (
     "子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥",
 )
+SUPPORTED_GREGORIAN_START = date(1582, 10, 15)
 
 
 class LunarDate(BaseModel):
